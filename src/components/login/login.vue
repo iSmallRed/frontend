@@ -42,6 +42,8 @@ export default {
       */
         // 1.登录成功跳转到首页
         if (status === 200) {
+          //1.1登录成功保存token值
+          localStorage.setItem('token', data.token)
           this.$router.push({ name: 'home' })
           // 2.登录成功
           this.$message.success(msg)
