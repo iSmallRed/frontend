@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.m{
+				color : #FF0000
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h2>{{message}}</h2>
+			<ul>
+				<li :class="GetClasses()" v-for="(t, index) in list" @click="Change(t)">{{index}}-{{t}}</li>
+			</ul>
+		</div>
+		<script src="../../js/vue.min.js"></script>
+		<script>
+			const app = new Vue({
+				el : '#app',
+				data : {
+					message : 'HelloWorld!',
+					list : ['a'	,	'b'	,	'c'	,	'd'],
+					isActive : true
+				},
+				methods : {
+					GetClasses : function (){
+						return {m : this.isActive}
+					},
+					Change : function (t){
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
+
+function runAsync() {
+	var p = new Promise(function (resolve, reject){
+		setTimeout(function (){
+			console.log('执行结束');
+			resolve('nice');
+		}, 2000);
+	});
+	return p;
+}
+runAsync()
+

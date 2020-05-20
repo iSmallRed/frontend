@@ -1,11 +1,12 @@
 <template>
   <el-card class="box-card">
     <!-- 1. 面包屑 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    </el-breadcrumb> -->
+    <my-bread level1="用户管理" level2="用户列表"></my-bread>
     <!-- 2. 搜索 -->
     <el-row>
       <el-col>
@@ -120,7 +121,7 @@
             type="danger" 
             icon="el-icon-delete" 
             circle
-            @click="showDeleteUserMsgBox(scope.row)">
+            @click="showDeleteUserMsgBox(scope.row.id)">
           </el-button>
           <el-button size="mini"
             plain
@@ -256,6 +257,7 @@ export default {
       this.form = user
       this.dialogFormVisibleEdit = true
     },
+
     // 删除用户 - 打开消息盒子（config）
     showDeleteUserMsgBox(userId){
      this.$confirm('删除用户？', '提示', {
@@ -265,7 +267,7 @@ export default {
         }).then(async () => {
           // 发送删除请求 :id ---> 用户id
           const res = await this.$http.delete(`users/${userId}`)
-          // console.log(res);
+          console.log(res);
           if (res.data.meta.status===200) {
             this.pagenum = 1
             this.getUserList()
@@ -281,6 +283,7 @@ export default {
           });           
         });
     },
+    
     // 对话框增加用户 -> 发送请求
     async AddUser(){
 
